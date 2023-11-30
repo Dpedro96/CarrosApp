@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Carro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding"> <!-- Adicione um espaçamento interno -->
+  <ion-list>
+    <ion-item>
+      <ion-input label="Modelo" label-placement="floating" fill="outline" [(ngModel)]="modelo" class="custom-input"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input  label="Marca" label-placement="floating" fill="outline"[(ngModel)]="marca" class="custom-input"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input  label="Ano" label-placement="floating" fill="outline"[(ngModel)]="ano" class="custom-input"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input  label="Preço" label-placement="floating" fill="outline" [(ngModel)]="price" class="custom-input"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select  label="Carroceria" label-placement="floating" fill="outline" [(ngModel)]="carroceria" interface="popover" placeholder="Selecione">
+        <ion-select-option value="Hatch">Hatch</ion-select-option>
+        <ion-select-option value="Sedã">Sedã</ion-select-option>
+        <ion-select-option value="SUV">SUV</ion-select-option>
+        <ion-select-option value="Pick-Up">Pick-Up</ion-select-option>
+        <ion-select-option value="Não Especificado">Não Especificado</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-button size="default" color="success" shape="round">
+        <input type="file" (change)="uploadFile($event.target)"/>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="cadastrar()" class="btn-salvar" >Cadastrar</ion-button> <!-- Use 'full' para ocupar toda a largura -->
+</ion-content>

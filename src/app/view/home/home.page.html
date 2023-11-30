@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title>Garage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-list *ngFor="let carro of listaCarros" >
+    <ion-item  class="car-item custom-item-background" (click)="detalhar(carro)">
+      <ion-avatar *ngIf="carro.downloadURL != null"><img src="{{carro.downloadURL}}"/></ion-avatar>
+      <ion-avatar *ngIf="carro.downloadURL == null"><img src="../../../assets/car2.avif"/></ion-avatar>
+      <ion-label paddind-left="5px" class="car-label">{{carro.modelo}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab horizontal="end" vertical="bottom">
+    <ion-fab-button class="btn" (click)="irParaCadastrar()">
+      <ion-icon name="person-add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

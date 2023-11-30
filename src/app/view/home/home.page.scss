@@ -1,0 +1,38 @@
+/* home.page.scss */
+ion-toolbar {
+  --background: #b8642c; /* Cor roxa para o cabeçalho */
+}
+.btn{
+  --background: #b8642c;
+}
+
+ion-content {
+  --background: #fff; /* Cor branca para o fundo da página */
+}
+ion-title{
+  color: #fff
+}
+.icon{
+  padding-right: 10px;
+}
+ion-item::part(native) {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid rgb(0, 0, 0);
+  margin-top: 10px;
+  border-radius: 20px;
+}
+
+ion-item::part(detail-icon) {
+  color: white;
+  opacity: 1;
+  font-size: 20px;
+}
+.car-label{
+  margin-left: 10px;
+}
+
+.car-item{
+  margin-right: 10px;
+  margin-left: 10px;
+}

@@ -1,0 +1,21 @@
+ion-toolbar {
+    --background: #b8642c; /* Cor roxa para o cabeçalho */
+  }
+
+  
+  ion-content {
+    --background: #fff; /* Cor branca para o fundo da página */
+  }
+  ion-title{
+    color: #fff
+  }
+
+  .btn-salvar{
+    --background: #b8642c;
+  }
+  ion-back-button{
+    color: #fff;
+  }
+  ion-item{
+    margin-bottom: 10px ;
+  }
