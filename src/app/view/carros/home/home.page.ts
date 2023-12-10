@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import Carros from 'src/app/model/entities/Carros';
 import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
+import { AuthService } from 'src/app/model/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ import { FirebaseService } from 'src/app/model/services/firebase.service';
 export class HomePage {
   listaCarros : Carros[] = []
 
-  constructor(private firebase: FirebaseService, private router: Router) {
+  constructor(private authService: AuthService, private firebase: FirebaseService, private router: Router) {
+    console.log(this.authService.getUserLogged());
     this.firebase.read().subscribe(res => { this.listaCarros = res.map(carros =>{
       return{
         id : carros.payload.doc.id,
@@ -26,5 +28,11 @@ export class HomePage {
 
   detalhar(carros: Carros){
     this.router.navigateByUrl("/detalhes", {state: {carros:carros}});
+  }
+
+  logout(){
+    this.authService.signOut().then((res)=>{
+      this.router.navigate(['signin']);
+    })
   }
 }
