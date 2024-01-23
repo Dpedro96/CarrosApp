@@ -7,6 +7,7 @@ export default class Carros{
     private _price: number
     private _carroceria: string
     private _downloadURL: any;
+    private _uid : string;
 
     constructor(modelo: string, marca: string, ano: number, price: number,  carroceria: string){
         this._modelo = modelo;
@@ -15,7 +16,12 @@ export default class Carros{
         this._price = price;
         this._carroceria = carroceria;
     }
-
+    public get uid(): string {
+        return this._uid;
+      }
+      public set uid(value: string) {
+        this._uid = value;
+      }
     public get id(): string {
         return this._id
     }

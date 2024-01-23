@@ -21,6 +21,7 @@
     <span *ngIf="formLogar.get('senha')?.dirty && formLogar.get('senha')?.errors?.['minlength']">Senha mínimo 6 dígitos</span>
     <ion-button type="submit" expand="full" color="success" shape="round">Entrar</ion-button>
     <ion-button (click)="logarComGoogle()" expand="full" color="danger" shape="round"><ion-icon slot="start" name="logo-google"></ion-icon>Entrar com Google</ion-button>
+    <ion-button (click)="logarComGithub()" expand="full" color="light" shape="round"><ion-icon slot="start" name="logo-github"></ion-icon>Entrar com GitHub</ion-button>
     <a (click)="irParaSignUp()">Cadastrar</a>
   </form>
 </ion-content>

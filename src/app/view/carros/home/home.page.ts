@@ -11,10 +11,11 @@ import { AuthService } from 'src/app/model/services/auth.service';
 })
 export class HomePage {
   listaCarros : Carros[] = []
-
+  public user:any;
   constructor(private authService: AuthService, private firebase: FirebaseService, private router: Router) {
-    console.log(this.authService.getUserLogged());
-    this.firebase.read().subscribe(res => { this.listaCarros = res.map(carros =>{
+    this.user = this.authService.getUserLogged()
+    console.log(this.user);
+    this.firebase.read(this.user.uid).subscribe(res => { this.listaCarros = res.map(carros =>{
       return{
         id : carros.payload.doc.id,
         ... carros.payload.doc.data() as any

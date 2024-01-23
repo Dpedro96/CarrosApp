@@ -51,13 +51,31 @@ export class SigninPage implements OnInit {
     })
   }
 
-  logarComGoogle(): void{
-    this.authService.signWithGoogle().then((res)=>{
-      this.alert.presentAlert("Olá", "Seja bem vindo");
-      this.route.navigate(["home"]);
+  public logarComGoogle(): void{
+    this.authService.signInWithGoogle().then((res)=>{
+      setTimeout(() => {
+        this.alert.presentAlert("Olá", "Seja bem vindo");
+        this.route.navigate(["home"]);
+      }, 1000);
     } ).catch((error)=>{
       this.alert.presentAlert('Logar', 'Erro ao logar');
       console.log(error);
+    })
+  }
+
+  public logarComGithub(): void{
+    this.authService.signInWithGithub().then((res)=>{
+      setTimeout(() => {
+        this.alert.presentAlert("Olá", "Seja bem vindo");
+        this.route.navigate(["home"]);
+      }, 1000);
+    } ).catch((error)=>{
+      if (error.code === 'auth/accont-exists-with-diferrent-credential'){
+        this.alert.presentAlert('Logar', 'Esse email já está com outro acesso')
+      }else{
+      this.alert.presentAlert('Logar', 'Erro ao logar');
+      console.log(error);
+    }
     })
   }
 

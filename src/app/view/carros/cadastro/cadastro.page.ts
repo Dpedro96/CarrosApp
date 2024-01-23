@@ -3,6 +3,7 @@ import Carros from 'src/app/model/entities/Carros';
 import { AlertController } from '@ionic/angular';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/model/services/auth.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -16,15 +17,19 @@ export class CadastroPage implements OnInit {
   price: number
   carroceria: string
   carros: Carros;
+  public user : any;
   public imagem: any;
 
-  constructor(private alertController: AlertController, private router: Router, private firebase: FirebaseService){ }
+  constructor(private alertController: AlertController, private router: Router, private firebase: FirebaseService,private auth: AuthService){
+    this.user = this.auth.getUserLogged();
+   }
 
   ngOnInit() {
   }
   cadastrar(){
     if(this.modelo && this.marca && this.ano){
       let novo: Carros = new Carros(this.modelo,this.marca, this.ano, this.price, this.carroceria);
+      novo.uid = this.user.uid;
       if(this.imagem){
         this.firebase.uploadImage(this.imagem, novo);
       }

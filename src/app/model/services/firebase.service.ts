@@ -11,24 +11,24 @@ export class FirebaseService {
   private PATH : string = 'carros';
   constructor(private firestore : AngularFirestore, private storage : AngularFireStorage) { }
 
-  read(){
-    return this.firestore.collection(this.PATH).snapshotChanges();
+  read(uid: string){
+    return this.firestore.collection(this.PATH, ref=> ref.where('uid', '==', uid)).snapshotChanges();
   }
 
   create(carros : Carros){
-    return this.firestore.collection(this.PATH).add({modelo: carros.modelo, marca: carros.marca, ano: carros.ano, price: carros.price, carroceria: carros.carroceria});
+    return this.firestore.collection(this.PATH).add({modelo: carros.modelo, marca: carros.marca, ano: carros.ano, price: carros.price, carroceria: carros.carroceria, uid: carros.uid});
   }
 
   createWithAvatar(carros: Carros){
-    return this.firestore.collection(this.PATH).add({modelo: carros.modelo, marca: carros.marca, ano: carros.ano, price: carros.price, carroceria: carros.carroceria, downloadURL : carros.downloadURL});
+    return this.firestore.collection(this.PATH).add({modelo: carros.modelo, marca: carros.marca, ano: carros.ano, price: carros.price, carroceria: carros.carroceria, downloadURL : carros.downloadURL, uid: carros.uid});
   }
 
   update(carros: Carros, id: string){
-    return this.firestore.collection(this.PATH).doc(id).update({modelo: carros.modelo, marca: carros.marca, ano: carros.ano, price: carros.price, carroceria: carros.carroceria});
+    return this.firestore.collection(this.PATH).doc(id).update({modelo: carros.modelo, marca: carros.marca, ano: carros.ano, price: carros.price, carroceria: carros.carroceria, uid: carros.uid});
   }
 
   updateWithAvatar(carros: Carros, id: string){
-    return this.firestore.collection(this.PATH).doc(id).update({modelo: carros.modelo, marca: carros.marca, ano: carros.ano, price: carros.price, carroceria: carros.carroceria, downloadURL : carros.downloadURL});
+    return this.firestore.collection(this.PATH).doc(id).update({modelo: carros.modelo, marca: carros.marca, ano: carros.ano, price: carros.price, carroceria: carros.carroceria, downloadURL : carros.downloadURL, uid: carros.uid});
   }
 
   delete(carros: Carros){

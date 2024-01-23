@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 import Carros from 'src/app/model/entities/Carros';
+import { AuthService } from 'src/app/model/services/auth.service';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 
 
@@ -22,7 +23,10 @@ export class DetalhesPage implements OnInit {
   carroceria: string
   edicao: boolean = true
   public imagem: any;
-  constructor(private firebase: FirebaseService, private router: Router, private alertController: AlertController) { }
+  public user : any;
+  constructor(private firebase: FirebaseService, private router: Router,private auth: AuthService, private alertController: AlertController) { 
+    this.user = this.auth.getUserLogged();
+  }
 
   ngOnInit() {
     this.carros = history.state.carros;
@@ -43,11 +47,11 @@ export class DetalhesPage implements OnInit {
       if(this.modelo && this.marca && this.ano){
         let novo: Carros = new Carros(this.modelo,this.marca, this.ano, this.price, this.carroceria);
         novo.id = this.carros.id;
+        novo.uid = this.user.uid;
         if(this.imagem){
           this.firebase.uploadImage(this.imagem, novo);
         }
         else{
-          novo.downloadURL = this.carros.downloadURL;
           this.firebase.update(novo, this.carros.id);
         }
         this.presentAlert("Salvo", "Carro Salvo!");
