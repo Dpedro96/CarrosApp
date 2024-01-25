@@ -8,7 +8,7 @@
 
 <ion-content>
   
-  <ion-list *ngFor="let carro of listaCarros" >
+  <ion-list *ngFor="let carro of listaCarros" lines="none">
     <ion-item  class="car-item custom-item-background" (click)="detalhar(carro)">
       <ion-avatar *ngIf="carro.downloadURL != null"><img src="{{carro.downloadURL}}"/></ion-avatar>
       <ion-avatar *ngIf="carro.downloadURL == null"><img src="../../../assets/car2.avif"/></ion-avatar>

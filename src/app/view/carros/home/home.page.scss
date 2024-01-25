@@ -15,12 +15,14 @@ ion-title{
 .icon{
   padding-right: 10px;
 }
+
 ion-item::part(native) {
   background: #ffffff;
   color: #000000;
   border: 1px solid rgb(0, 0, 0);
   margin-top: 10px;
   border-radius: 20px;
+  padding: 20px;
 }
 
 ion-item::part(detail-icon) {

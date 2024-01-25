@@ -55,4 +55,8 @@ export class SignupPage implements OnInit {
         console.log(error);
       })
     }
+
+    irParaSignin(){
+      this.router.navigate(["signin"]);
+    }
 }

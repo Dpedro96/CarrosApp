@@ -1,27 +1,26 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Logar</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
   <form [formGroup]="formLogar" (ngSubmit)="submitForm()">
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
-    </ion-item>
+  <div class="header">
+    <h2>Garage</h2>
+    <h1>Faça login<br>Para Continuar</h1>
+  </div>
+  <div class="form">
+    <ion-input type="email" placeholder="Email" formControlName="email" ></ion-input>
     <span *ngIf="formLogar.get('email')?.touched && formLogar.get('email')?.errors?.['required']">Email é obrigatorio</span><br>
-    <span *ngIf="formLogar.get('email')?.dirty && formLogar.get('email')?.errors?.['email']">Foramto de Email Invalido</span>
-    <ion-item>
-      <!--Mensagem de erro de senha-->
-      <ion-label position="floating">Senha</ion-label>
-      <ion-input type="password" formControlName="senha"></ion-input>
-    </ion-item>
+    <span *ngIf="formLogar.get('email')?.dirty && formLogar.get('email')?.errors?.['email']">Formato de Email Invalido</span>
+    
+    <ion-input type="senha" placeholder="Senha" formControlName="senha"></ion-input>
     <span *ngIf="formLogar.get('senha')?.touched && formLogar.get('senha')?.errors?.['required']">Senha é obrigatoria</span><br>
     <span *ngIf="formLogar.get('senha')?.dirty && formLogar.get('senha')?.errors?.['minlength']">Senha mínimo 6 dígitos</span>
-    <ion-button type="submit" expand="full" color="success" shape="round">Entrar</ion-button>
-    <ion-button (click)="logarComGoogle()" expand="full" color="danger" shape="round"><ion-icon slot="start" name="logo-google"></ion-icon>Entrar com Google</ion-button>
-    <ion-button (click)="logarComGithub()" expand="full" color="light" shape="round"><ion-icon slot="start" name="logo-github"></ion-icon>Entrar com GitHub</ion-button>
-    <a (click)="irParaSignUp()">Cadastrar</a>
-  </form>
+  </div>
+  <div class="button">
+    <ion-button type="submit" shape="round" style=" margin-top: 2px;">Login</ion-button> <ion-icon name="chevron-forward-outline"></ion-icon>
+  </div>
+  <ion-button class="buttonG" (click)="logarComGoogle()" shape="round"><ion-icon  slot="start" name="logo-google"></ion-icon>Entrar com Google</ion-button>
+  <ion-button class="buttonGh" (click)="logarComGithub()" shape="round"><ion-icon slot="start" name="logo-github"></ion-icon>Entrar com GitHub</ion-button>
+  <div class="footer">
+    <h3 routerLink="/irParaSignUp">Não Possui uma Conta? <a  (click)="irParaSignUp()">Criar</a></h3>
+  </div>
+</form>
 </ion-content>
