@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { AlertService } from 'src/app/common/alert.service';
 
 import Carros from 'src/app/model/entities/Carros';
 import { AuthService } from 'src/app/model/services/auth.service';
@@ -15,27 +17,32 @@ import { FirebaseService } from 'src/app/model/services/firebase.service';
 })
 export class DetalhesPage implements OnInit {
   carros : Carros
-  indice : number
-  modelo: string
-  marca: string
-  ano: number
-  price: number
-  carroceria: string
   edicao: boolean = true
   public imagem: any;
   public user : any;
-  constructor(private firebase: FirebaseService, private router: Router,private auth: AuthService, private alertController: AlertController) { 
+  formCadastrar : FormGroup;
+  constructor(private formBuilder:FormBuilder, private firebase: FirebaseService, private router: Router,private auth: AuthService, private alert: AlertService, private alertController: AlertController) { 
     this.user = this.auth.getUserLogged();
+    this.formCadastrar = new FormGroup({
+      modelo: new FormControl(),
+      marca: new FormControl(),
+      ano: new FormControl(''),
+      price: new FormControl(''),
+      carroceria: new FormControl('')
+    });
   }
 
   ngOnInit() {
     this.carros = history.state.carros;
-    this.modelo = this.carros.modelo;
-    this.marca = this.carros.marca;
-    this.ano = this.carros.ano;
-    this.price = this.carros.price;
-    this.carroceria = this.carros.carroceria;
+    this.formCadastrar = this.formBuilder.group({
+      modelo: [this.carros.modelo, [Validators.required]],
+      marca:  [this.carros.marca, [Validators.required]],
+      ano:  [this.carros.ano, [Validators.required]],
+      price:  [this.carros.price, [Validators.required]],
+      carroceria:  [this.carros.carroceria, [Validators.required]],
+    })
   }
+  
   habilitar(){
     if(this.edicao){
       this.edicao = false
@@ -44,8 +51,7 @@ export class DetalhesPage implements OnInit {
     }
   }
     salvar(){
-      if(this.modelo && this.marca && this.ano){
-        let novo: Carros = new Carros(this.modelo,this.marca, this.ano, this.price, this.carroceria);
+        let novo: Carros = new Carros(this.formCadastrar.value['modelo'],this.formCadastrar.value['marca'], this.formCadastrar.value['ano'], this.formCadastrar.value['price'], this.formCadastrar.value['carroceria']);
         novo.id = this.carros.id;
         novo.uid = this.user.uid;
         if(this.imagem){
@@ -54,29 +60,15 @@ export class DetalhesPage implements OnInit {
         else{
           this.firebase.update(novo, this.carros.id);
         }
-        this.presentAlert("Salvo", "Carro Salvo!");
+        this.alert.presentAlert("Salvo", "Carro Salvo!");
         this.router.navigate(['/home']);
       }
-      else{
-        this.presentAlert("Erro", "Campos Obrigatórios!");
-      }
-    }
 
     excluir(){
       this.firebase.delete(this.carros);
       this.router.navigate(['/home'])
     }
 
-    async presentAlert(subHeader: string, message: string){
-      const alert = await this.alertController.create({
-        header: 'Garage',
-        subHeader: subHeader,
-        message: message,
-        buttons: ['OK'],
-      });
-  
-      await alert.present();
-    }
     async showConfirm() {
       const confirm = this.alertController.create({
           message: 'Você tem certeza',

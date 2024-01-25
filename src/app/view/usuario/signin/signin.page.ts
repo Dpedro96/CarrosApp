@@ -35,6 +35,7 @@ export class SigninPage implements OnInit {
       return false;
     }
     else{
+      this.alert.simpleLoader();
       this.logar();
       return true;
     }
@@ -43,9 +44,11 @@ export class SigninPage implements OnInit {
   private logar() {
     this.authService.signIn(this.formLogar.value['email'],
     this.formLogar.value['senha']).then((res)=>{
+      this.alert.dismissLoader();
       this.alert.presentAlert("Olá", "Seja bem vindo");
       this.route.navigate(["home"]);
     } ).catch((error)=>{
+      this.alert.dismissLoader();
       this.alert.presentAlert('Logar', 'Erro ao logar');
       console.log(error);
     })
