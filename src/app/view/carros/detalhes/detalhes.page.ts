@@ -51,18 +51,23 @@ export class DetalhesPage implements OnInit {
     }
   }
     salvar(){
-        let novo: Carros = new Carros(this.formCadastrar.value['modelo'],this.formCadastrar.value['marca'], this.formCadastrar.value['ano'], this.formCadastrar.value['price'], this.formCadastrar.value['carroceria']);
-        novo.id = this.carros.id;
-        novo.uid = this.user.uid;
-        if(this.imagem){
-          this.firebase.uploadImage(this.imagem, novo);
+      if(this.formCadastrar.value['modelo'] && this.formCadastrar.value['marca'] && this.formCadastrar.value['ano'] && this.formCadastrar.value['carroceria']){
+          let novo: Carros = new Carros(this.formCadastrar.value['modelo'],this.formCadastrar.value['marca'], this.formCadastrar.value['ano'], this.formCadastrar.value['price'], this.formCadastrar.value['carroceria']);
+          novo.id = this.carros.id;
+          novo.uid = this.user.uid;
+          if(this.imagem){
+            this.firebase.uploadImage(this.imagem, novo);
+          }
+          else{
+            this.firebase.update(novo, this.carros.id);
+          }
+          this.alert.presentAlert("Salvo", "Carro Salvo!");
+          this.router.navigate(['/home']);
         }
         else{
-          this.firebase.update(novo, this.carros.id);
+          this.alert.presentAlert("Erro", "Campos Obrigatórios");
         }
-        this.alert.presentAlert("Salvo", "Carro Salvo!");
-        this.router.navigate(['/home']);
-      }
+    }
 
     excluir(){
       this.firebase.delete(this.carros);

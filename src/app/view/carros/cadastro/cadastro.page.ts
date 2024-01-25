@@ -38,6 +38,7 @@ export class CadastroPage implements OnInit {
     })
   }
   cadastrar(){
+    if(this.formCadastrar.value['modelo'] && this.formCadastrar.value['marca'] && this.formCadastrar.value['ano'] && this.formCadastrar.value['carroceria']){
       let novo: Carros = new Carros(this.formCadastrar.value['modelo'],this.formCadastrar.value['marca'], this.formCadastrar.value['ano'], this.formCadastrar.value['price'], this.formCadastrar.value['carroceria']);
       novo.uid = this.user.uid;
       if(this.imagem){
@@ -49,6 +50,10 @@ export class CadastroPage implements OnInit {
       this.alert.presentAlert("Salvo", "Carro Salvo!");
       this.router.navigate(['/home']);
     }
+    else{
+      this.alert.presentAlert("Erro", "Campos Obrigatórios");
+    }
+  }
 
   uploadFile(imagem: any){
     this.imagem = imagem.files;
