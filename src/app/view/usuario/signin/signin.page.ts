@@ -44,9 +44,11 @@ export class SigninPage implements OnInit {
   private logar() {
     this.authService.signIn(this.formLogar.value['email'],
     this.formLogar.value['senha']).then((res)=>{
-      this.alert.dismissLoader();
-      this.alert.presentAlert("Olá", "Seja bem vindo");
-      this.route.navigate(["home"]);
+        setTimeout(() => {
+          this.alert.dismissLoader();
+          this.alert.presentAlert("Olá", "Seja bem vindo");
+          this.route.navigate(["home"]);
+        }, 1000);
     } ).catch((error)=>{
       this.alert.dismissLoader();
       this.alert.presentAlert('Logar', 'Erro ao logar');
@@ -73,12 +75,12 @@ export class SigninPage implements OnInit {
         this.route.navigate(["home"]);
       }, 1000);
     } ).catch((error)=>{
-      if (error.code === 'auth/accont-exists-with-diferrent-credential'){
-        this.alert.presentAlert('Logar', 'Esse email já está com outro acesso')
+      if (error.code === 'auth/accont-exists-with-different-credential'){
+        this.alert.presentAlert('Erro', 'Esse email já está com outro acesso')
       }else{
-      this.alert.presentAlert('Logar', 'Erro ao logar');
+      this.alert.presentAlert('Erro', 'Erro ao logar');
       console.log(error);
-    }
+      }
     })
   }
 

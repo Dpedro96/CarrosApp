@@ -50,7 +50,11 @@ export class DetalhesPage implements OnInit {
       this.edicao = true;
     }
   }
+
     salvar(){
+    this.alert.simpleLoader();
+    setTimeout(() => {
+    this.alert.dismissLoader();
       if(this.formCadastrar.value['modelo'] && this.formCadastrar.value['marca'] && this.formCadastrar.value['ano'] && this.formCadastrar.value['carroceria']){
           let novo: Carros = new Carros(this.formCadastrar.value['modelo'],this.formCadastrar.value['marca'], this.formCadastrar.value['ano'], this.formCadastrar.value['price'], this.formCadastrar.value['carroceria']);
           novo.id = this.carros.id;
@@ -67,6 +71,7 @@ export class DetalhesPage implements OnInit {
         else{
           this.alert.presentAlert("Erro", "Campos Obrigatórios");
         }
+      }, 1000);
     }
 
     excluir(){
