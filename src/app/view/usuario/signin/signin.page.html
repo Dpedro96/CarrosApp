@@ -14,9 +14,7 @@
     <span *ngIf="formLogar.get('senha')?.touched && formLogar.get('senha')?.errors?.['required']">Senha é obrigatoria</span><br>
     <span *ngIf="formLogar.get('senha')?.dirty && formLogar.get('senha')?.errors?.['minlength']">Senha mínimo 6 dígitos</span>
   </div>
-  <div class="button">
-    <ion-button type="submit" shape="round" style=" margin-top: 2px;">Login</ion-button> <ion-icon name="chevron-forward-outline"></ion-icon>
-  </div>
+  <ion-button class="button" type="submit" shape="round" style=" margin-top: 2px;border: none;">Login</ion-button>
   <ion-button class="buttonG" (click)="logarComGoogle()" shape="round"><ion-icon  slot="start" name="logo-google"></ion-icon>Entrar com Google</ion-button>
   <ion-button class="buttonGh" (click)="logarComGithub()" shape="round"><ion-icon slot="start" name="logo-github"></ion-icon>Entrar com GitHub</ion-button>
   <div class="footer">

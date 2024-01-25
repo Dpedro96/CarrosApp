@@ -1,13 +1,20 @@
-ion-toolbar {
-    --background: #b8642c; /* Cor roxa para o cabeçalho */
-  }
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&display=swap');
 
+ion-toolbar {
+    --background: #975122; /* Cor roxa para o cabeçalho */
+  }
+  
+  .ss{
+    padding: 13px;
+  }
   
   ion-content {
     --background: #fff; /* Cor branca para o fundo da página */
   }
   ion-title{
-    color: #fff
+    font-family: 'DM Serif Display', serif;
+    color: #e9e3e3;
+    font-size: 35px;
   }
 
   .btn-salvar{

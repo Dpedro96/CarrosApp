@@ -24,8 +24,8 @@ export class DetalhesPage implements OnInit {
   constructor(private formBuilder:FormBuilder, private firebase: FirebaseService, private router: Router,private auth: AuthService, private alert: AlertService, private alertController: AlertController) { 
     this.user = this.auth.getUserLogged();
     this.formCadastrar = new FormGroup({
-      modelo: new FormControl(),
-      marca: new FormControl(),
+      modelo: new FormControl(''),
+      marca: new FormControl(''),
       ano: new FormControl(''),
       price: new FormControl(''),
       carroceria: new FormControl('')

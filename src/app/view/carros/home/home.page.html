@@ -2,23 +2,33 @@
   <ion-toolbar >
     <ion-button  color="dark" slot="end" fill="clear" (click)="logout()" ><ion-icon name="exit-outline"></ion-icon></ion-button>
 
-    <ion-title>Garage</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-title >Garage</ion-title>
+  </ion-toolbar >
+</ion-header >
 
 <ion-content>
-  
+  <br>
   <ion-list *ngFor="let carro of listaCarros" lines="none">
-    <ion-item  class="car-item custom-item-background" (click)="detalhar(carro)">
-      <ion-avatar *ngIf="carro.downloadURL != null"><img src="{{carro.downloadURL}}"/></ion-avatar>
-      <ion-avatar *ngIf="carro.downloadURL == null"><img src="../../../assets/car2.avif"/></ion-avatar>
-      <ion-label paddind-left="5px" class="car-label">{{carro.modelo}}</ion-label>
+    <ion-item class="car-item custom-item-background" (click)="detalhar(carro)">
+      <ion-thumbnail slot="start">
+        <ion-img *ngIf="carro.downloadURL != null" src="{{carro.downloadURL}}" />
+        <ion-img *ngIf="carro.downloadURL == null" src="../../../assets/car2.avif" />
+      </ion-thumbnail>
+      <ion-label style="padding-left: 10px;" class="car-label">{{carro.modelo}}</ion-label>
     </ion-item>
   </ion-list>
-
   <ion-fab horizontal="end" vertical="bottom">
     <ion-fab-button class="btn" (click)="irParaCadastrar()">
       <ion-icon name="person-add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+<!-- 
+
+    <ion-item  class="car-item custom-item-background" (click)="detalhar(carro)">
+      <ion-avatar ><img src="{{carro.downloadURL}}"/></ion-avatar>
+      <ion-avatar ><img "/></ion-avatar>
+      <ion-label paddind-left="5px" class="car-label">{{carro.modelo}}</ion-label>
+    </ion-item>
+  </ion-list>
+-->
