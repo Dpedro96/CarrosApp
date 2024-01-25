@@ -38,7 +38,7 @@ export class DetalhesPage implements OnInit {
       modelo: [this.carros.modelo, [Validators.required]],
       marca:  [this.carros.marca, [Validators.required]],
       ano:  [this.carros.ano, [Validators.required]],
-      price:  [this.carros.price, [Validators.required]],
+      price:  [this.carros.price],
       carroceria:  [this.carros.carroceria, [Validators.required]],
     })
   }

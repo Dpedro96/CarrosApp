@@ -33,7 +33,7 @@ export class CadastroPage implements OnInit {
       modelo: ['', [Validators.required]],
       marca:  ['', [Validators.required]],
       ano:  ['', [Validators.required]],
-      price:  ['', [Validators.required]],
+      price:  [''],
       carroceria:  ['', [Validators.required]],
     })
   }
