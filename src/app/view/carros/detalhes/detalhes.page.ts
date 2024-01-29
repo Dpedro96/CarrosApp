@@ -21,6 +21,7 @@ export class DetalhesPage implements OnInit {
   public imagem: any;
   public user : any;
   formCadastrar : FormGroup;
+  currentYear = new Date().getFullYear();
   constructor(private formBuilder:FormBuilder, private firebase: FirebaseService, private router: Router,private auth: AuthService, private alert: AlertService, private alertController: AlertController) { 
     this.user = this.auth.getUserLogged();
     this.formCadastrar = new FormGroup({
@@ -37,8 +38,8 @@ export class DetalhesPage implements OnInit {
     this.formCadastrar = this.formBuilder.group({
       modelo: [this.carros.modelo, [Validators.required]],
       marca:  [this.carros.marca, [Validators.required]],
-      ano:  [this.carros.ano, [Validators.required]],
-      price:  [this.carros.price],
+      ano:  [this.carros.ano, [Validators.required, Validators.pattern(/^(19|20)?\d{2,4}$/), Validators.min(this.currentYear - 100), Validators.max(this.currentYear)]],
+      price: [this.carros.price, [Validators.pattern(/^(\d{1,3}(.\d{3})*(\.\d{1,2})?|\d+(\.\d{1,2})?)$/), Validators.min(0)]],
       carroceria:  [this.carros.carroceria, [Validators.required]],
     })
   }
@@ -55,7 +56,7 @@ export class DetalhesPage implements OnInit {
     this.alert.simpleLoader();
     setTimeout(() => {
     this.alert.dismissLoader();
-      if(this.formCadastrar.value['modelo'] && this.formCadastrar.value['marca'] && this.formCadastrar.value['ano'] && this.formCadastrar.value['carroceria']){
+      if(this.formCadastrar.valid){
           let novo: Carros = new Carros(this.formCadastrar.value['modelo'],this.formCadastrar.value['marca'], this.formCadastrar.value['ano'], this.formCadastrar.value['price'], this.formCadastrar.value['carroceria']);
           novo.id = this.carros.id;
           novo.uid = this.user.uid;

@@ -23,8 +23,14 @@
         <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.errors?.['required']">Ano é obrigatorio</span><br>
       </ion-item>
       <ion-item>
-        <ion-input  label="Preço" label-placement="floating" fill="outline" formControlName="price" class="custom-input"></ion-input>
-      </ion-item>
+        <ion-input
+        label="Preço"
+        label-placement="floating"
+        fill="outline"
+        formControlName="price"
+        class="custom-input"
+      ></ion-input>
+      </ion-item>                
       <ion-item>
         <ion-select  label="Carroceria" label-placement="floating" fill="outline" formControlName="carroceria" interface="popover" placeholder="Selecione">
           <ion-select-option value="Hatch">Hatch</ion-select-option>

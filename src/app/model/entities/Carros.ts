@@ -4,12 +4,12 @@ export default class Carros{
     private _modelo: string
     private _marca: string
     private _ano: number
-    private _price: number
+    private _price: string
     private _carroceria: string
     private _downloadURL: any;
     private _uid : string;
 
-    constructor(modelo: string, marca: string, ano: number, price: number,  carroceria: string){
+    constructor(modelo: string, marca: string, ano: number, price: string,  carroceria: string){
         this._modelo = modelo;
         this._marca = marca;
         this._ano = ano;
@@ -46,10 +46,10 @@ export default class Carros{
     public set ano(value: number) {
         this._ano = value
     }
-    public get price(): number {
+    public get price(): string {
         return this._price
     }
-    public set price(value: number) {
+    public set price(value: string) {
         this._price = value
     }
     public get carroceria(): string {
