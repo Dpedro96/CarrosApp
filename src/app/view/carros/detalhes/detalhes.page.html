@@ -35,12 +35,17 @@
         </ion-label>
         <ion-input formControlName="ano" type="number"></ion-input>
         <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.errors?.['required']">Modelo é obrigatorio</span><br>
+        <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.hasError('pattern')">Ano inválido</span>
+        <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.hasError('min')">Ano não pode ser menor que {{ currentYear - 100 }}</span>
+        <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.hasError('max')">Ano não pode ser maior que {{ currentYear }}</span><br>
       </ion-item>
       <ion-item [disabled]="edicao">
         <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
           Preço
         </ion-label>
         <ion-input formControlName="price" type="number"></ion-input>
+        <span *ngIf="formCadastrar.get('price')?.touched && formCadastrar.get('price')?.hasError('pattern')">Preço inválido</span>
+        <span *ngIf="formCadastrar.get('price')?.touched && formCadastrar.get('price')?.hasError('min')">Preço não pode ser negativo</span><br>
       </ion-item>
       <ion-item [disabled]="edicao">
         <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">

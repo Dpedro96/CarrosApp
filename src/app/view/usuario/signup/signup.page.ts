@@ -40,6 +40,7 @@ export class SignupPage implements OnInit {
       return false
     }
     else{
+      this.alert.simpleLoader();
         this.cadastrar();
         return true;
 
@@ -48,8 +49,11 @@ export class SignupPage implements OnInit {
     private cadastrar(){
       this.authService.signUpWithEmailPassword(this.formCadastrar.value['email'],
       this.formCadastrar.value['senha']).then((res)=>{
-        this.alert.presentAlert('Cadastrado', 'Cadastrado com sucesso')
-        this.router.navigate(["signin"]);
+        setTimeout(() => {
+          this.alert.dismissLoader();
+          this.alert.presentAlert('Cadastrado', 'Cadastrado com sucesso')
+          this.router.navigate(["home"]);
+        }, 1000);
       } ).catch((error)=>{
         this.alert.presentAlert('Erro', 'Erro ao Cadastrar');
         console.log(error);
