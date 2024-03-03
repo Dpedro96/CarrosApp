@@ -10,17 +10,27 @@ import { AuthService } from 'src/app/model/services/auth.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  listaCarros : Carros[] = []
+  listaCarros : Carros[] = [];
+  isLoading: boolean = false;
   public user:any;
+  model: any = {
+    icon: 'car-sport-outline',
+    title: 'nenhum carro cadastrado',
+  };
+
   constructor(private authService: AuthService, private firebase: FirebaseService, private router: Router) {
     this.user = this.authService.getUserLogged()
     console.log(this.user);
+    this.isLoading = true;
+    setTimeout(()=>{
     this.firebase.read(this.user.uid).subscribe(res => { this.listaCarros = res.map(carros =>{
       return{
         id : carros.payload.doc.id,
         ... carros.payload.doc.data() as any
       } as Carros
     })})
+    this.isLoading = false;
+  },2000);
   }
 
   irParaCadastrar(){

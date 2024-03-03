@@ -1,0 +1,6 @@
+<ion-item class="car-item custom-item-background">
+  <ion-thumbnail slot="start">
+    <ion-img [src]="listaCarros?.downloadURL ? listaCarros.downloadURL : '../../../assets/car2.avif'"></ion-img>
+  </ion-thumbnail>
+  <ion-label style="padding-left: 10px;" class="car-label">{{listaCarros?.modelo}}</ion-label>
+</ion-item>

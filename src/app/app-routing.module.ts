@@ -26,8 +26,7 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./view/usuario/signup/signup.module').then( m => m.SignupPageModule)
-  },
-
+  }
 
 ];
 
