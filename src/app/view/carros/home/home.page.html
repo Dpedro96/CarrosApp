@@ -1,23 +1,30 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-button color="dark" slot="end" fill="clear" (click)="logout()"><ion-icon
-        name="exit-outline"></ion-icon></ion-button>
-    <ion-title>Garage</ion-title>
+     <ion-button color="dark" slot="end" fill="clear" (click)="logout()">
+       <ion-icon name="exit-outline"></ion-icon>
+     </ion-button>
+     <ion-title>Garage</ion-title>
   </ion-toolbar>
-</ion-header>
-
-<ion-content>
+ </ion-header>
+ 
+ <ion-content>
+  <ion-searchbar #mySearchbar animated debounce="800" #searchInput style="margin-top: 2%;" (ionChange)="onSearchChange($event)"></ion-searchbar>
   <app-loading-car *ngIf="isLoading"></app-loading-car>
   <ion-list *ngIf="!isLoading" lines="none">
-    <app-empty-screen *ngIf="!isLoading && listaCarros.length == 0" [model]="model"></app-empty-screen>
-    <ion-item-group *ngIf="listaCarros.length > 0">
-      <app-cars *ngFor="let listaCarros of listaCarros" [listaCarros]="listaCarros"
-        (click)="detalhar(listaCarros)"></app-cars>
-    </ion-item-group>
+       <app-empty-screen *ngIf="!isLoading && listaCarros.length == 0" [model]="model"></app-empty-screen>
+       <ion-item-group *ngIf="!hasSearched && listaCarros.length > 0">
+         <app-cars *ngFor="let carro of listaCarros" [listaCarros]="carro" (click)="detalhar(carro)"></app-cars>
+       </ion-item-group>
+       <ion-item-group *ngIf="hasSearched && carros.length > 0">
+         <app-cars *ngFor="let carro of carros" [listaCarros]="carro" (click)="detalhar(carro)"></app-cars>
+       </ion-item-group>
+       <app-empty-screen *ngIf="hasSearched && carros.length == 0" [model]="emptySearchModel"></app-empty-screen>
   </ion-list>
   <ion-fab horizontal="end" vertical="bottom">
-    <ion-fab-button class="btn" (click)="irParaCadastrar()">
-      <ion-icon name="person-add-outline"></ion-icon>
-    </ion-fab-button>
+       <ion-fab-button class="btn" (click)="irParaCadastrar()">
+         <ion-icon name="person-add-outline"></ion-icon>
+       </ion-fab-button>
   </ion-fab>
-</ion-content>
+ </ion-content>
+ 
+ 

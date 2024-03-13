@@ -7,66 +7,18 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="ion-padding">
   <form [formGroup]="formCadastrar" (ngSubmit)="salvar()">
     <ion-toggle (ionChange)="habilitar()" color="medium">Habilitar Edição</ion-toggle>
-    <ion-list lines="none">
-      <ion-item *ngIf="carros.downloadURL != null">
-        <img class="imgClass" src="{{carros.downloadURL}}"/>
-      </ion-item>
-      <ion-item [disabled]="edicao">
-        <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
-          Modelo
-        </ion-label>
-        <ion-input formControlName="modelo" ></ion-input>
-        <span *ngIf="formCadastrar.get('modelo')?.touched && formCadastrar.get('modelo')?.errors?.['required']">Modelo é obrigatorio</span><br>
-      </ion-item>
-      <ion-item [disabled]="edicao">
-        <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
-          Marca
-        </ion-label>
-        <ion-input formControlName="marca"></ion-input>
-        <span *ngIf="formCadastrar.get('marca')?.touched && formCadastrar.get('marca')?.errors?.['required']">Modelo é obrigatorio</span><br>
-      </ion-item>
-      <ion-item [disabled]="edicao">
-        <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
-          Ano
-        </ion-label>
-        <ion-input formControlName="ano" type="number"></ion-input>
-        <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.errors?.['required']">Modelo é obrigatorio</span><br>
-        <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.hasError('pattern')">Ano inválido</span>
-        <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.hasError('min')">Ano não pode ser menor que {{ currentYear - 100 }}</span>
-        <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.hasError('max')">Ano não pode ser maior que {{ currentYear }}</span><br>
-      </ion-item>
-      <ion-item [disabled]="edicao">
-        <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
-          Preço
-        </ion-label>
-        <ion-input formControlName="price" type="number"></ion-input>
-        <span *ngIf="formCadastrar.get('price')?.touched && formCadastrar.get('price')?.hasError('pattern')">Preço inválido</span>
-        <span *ngIf="formCadastrar.get('price')?.touched && formCadastrar.get('price')?.hasError('min')">Preço não pode ser negativo</span><br>
-      </ion-item>
-      <ion-item [disabled]="edicao">
-        <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
-          Carroceria
-        </ion-label>
-        <ion-select formControlName="carroceria" interface="popover" placeholder="Selecione" [disabled]="edicao">
-          <ion-select-option value="Hatch">Hatch</ion-select-option>
-          <ion-select-option value="Sedã">Sedã</ion-select-option>
-          <ion-select-option value="SUV">SUV</ion-select-option>
-          <ion-select-option value="Pick-Up">Pick-Up</ion-select-option>
-          <ion-select-option value="Não Especificado">Não Especificado</ion-select-option>
-        </ion-select>
-        <span *ngIf="formCadastrar.get('carroceria')?.touched && formCadastrar.get('carroceria')?.errors?.['required']">Modelo é obrigatorio</span><br>
-      </ion-item>
-      <ion-item>
-        <ion-button  expand="block" class="btn-salvar" shape="round" disabled="{{edicao}}">
-          <input type="file" (change)="uploadFile($event.target)"/>
-        </ion-button>
-      </ion-item>
-      <ion-button expand="block" type="submit" class="btn-salvar" [disabled]="edicao">Salvar</ion-button>
-      <ion-button expand="block" (click)="showConfirm()" color="danger" [disabled]="edicao">Excluir</ion-button>
-    </ion-list>
+    <app-items [carros]="carros" [formGroup]="formCadastrar" [edicao]="edicao" (carrosChange)="onCarrosChange($event)"></app-items>
+    <ion-item>
+      <ion-button expand="block" class="btn-salvar" shape="round" [disabled]="!edicao">
+        <input type="file" (change)="uploadFile($event.target)"/>
+      </ion-button>
+    </ion-item>
+    <ion-button expand="block" type="submit" class="btn-salvar" [disabled]="!edicao">Salvar</ion-button>
+    <ion-button expand="block" (click)="showConfirm()" color="danger" [disabled]="!edicao">Excluir</ion-button>
   </form>
 </ion-content>
+
+
