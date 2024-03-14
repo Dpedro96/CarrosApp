@@ -8,17 +8,14 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="formCadastrar" (ngSubmit)="salvar()">
-    <ion-toggle (ionChange)="habilitar()" color="medium">Habilitar Edição</ion-toggle>
-    <app-items [carros]="carros" [formGroup]="formCadastrar" [edicao]="edicao" (carrosChange)="onCarrosChange($event)"></app-items>
-    <ion-item>
-      <ion-button expand="block" class="btn-salvar" shape="round" [disabled]="!edicao">
-        <input type="file" (change)="uploadFile($event.target)"/>
-      </ion-button>
-    </ion-item>
-    <ion-button expand="block" type="submit" class="btn-salvar" [disabled]="!edicao">Salvar</ion-button>
+  <ion-toggle (ionChange)="habilitar()" color="medium">Habilitar Edição</ion-toggle>
+  <ion-item>
+    <ion-button expand="block" class="btn-salvar" shape="round" [disabled]="!edicao">
+      <input type="file" (change)="uploadFile($event.target)"/>
+    </ion-button>
+  </ion-item>
+    <app-items [carros]="carros" [edicao]="edicao" (carrosChange)="salvar($event)"></app-items>
     <ion-button expand="block" (click)="showConfirm()" color="danger" [disabled]="!edicao">Excluir</ion-button>
-  </form>
 </ion-content>
 
 

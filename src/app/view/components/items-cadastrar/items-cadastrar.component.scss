@@ -1,10 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&display=swap');
 
-  
   .ss{
     padding: 13px;
   }
-  
   ion-content {
     --background: #fff; /* Cor branca para o fundo da página */
   }
@@ -20,10 +18,6 @@
   ion-back-button{
     color: #fff;
   }
-  
-  .imgClass{
-    width: 100%;
-    height: 100%;
-    padding-top: 10px;
-    padding: 25px;
+  ion-item{
+    margin-bottom: 10px ;
   }

@@ -31,23 +31,15 @@ export class CadastroPage implements OnInit {
     });
    }
 
-  ngOnInit() {
-    this.formCadastrar = this.formBuilder.group({
-      modelo: ['', [Validators.required]],
-      marca:  ['', [Validators.required]],
-      ano:  ['', [Validators.required, Validators.pattern(/^(19|20)?\d{2,4}$/), Validators.min(this.currentYear - 100), Validators.max(this.currentYear)]],
-      price: ['', [Validators.pattern(/^(\d{1,3}(.\d{3})*(\.\d{1,2})?|\d+(\.\d{1,2})?)$/), Validators.min(0)]],
-      carroceria:  ['', [Validators.required]],
-    })
-  }
+  ngOnInit() {}
 
   
-cadastrar(){
+cadastrar(formCadastra: FormGroup){
     this.alert.simpleLoader();
     setTimeout(() => {
       this.alert.dismissLoader();
-    if(this.formCadastrar.valid){
-      let novo: Carros = new Carros(this.formCadastrar.value['modelo'],this.formCadastrar.value['marca'], this.formCadastrar.value['ano'], this.formCadastrar.value['price'], this.formCadastrar.value['carroceria']);
+    if(formCadastra.valid){
+      let novo: Carros = new Carros(formCadastra.value.modelo,formCadastra.value['marca'], formCadastra.value['ano'], formCadastra.value['price'], formCadastra.value['carroceria']);
       novo.uid = this.user.uid;
       if(this.imagem){
         this.firebase.uploadImage(this.imagem, novo);

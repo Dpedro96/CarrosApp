@@ -1,65 +1,128 @@
-<ion-item-group>
+<form [formGroup]="formGroup" (ngSubmit)="salvar()">
   <ion-item>
-    <ion-img [src]="carros?.downloadURL ? carros.downloadURL : '../../../assets/car2.avif'"></ion-img>
+    <ion-img
+      [src]="
+        carros.downloadURL ? carros.downloadURL : '../../../assets/car2.avif'
+      "
+    ></ion-img>
   </ion-item>
   <ion-item>
-    <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
+    <ion-label
+      style="
+        position: relative;
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #333;
+      "
+      position="floating"
+    >
       Modelo
     </ion-label>
-    <ion-input formControlName="modelo" [value]="carros?.modelo" [disabled]="!edicao" (ionChange)="onChange()"></ion-input>
+    <ion-input formControlName="modelo" [disabled]="!edicao"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
+    <ion-label
+      style="
+        position: relative;
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #333;
+      "
+      position="floating"
+    >
       Marca
     </ion-label>
-    <ion-input formControlName="marca" [value]="carros?.marca" [disabled]="!edicao" (ionChange)="onChange()"></ion-input>
-    <span *ngIf="formGroup.get('marca')?.touched && formGroup.get('marca')?.errors?.['required']">
-      Marca é obrigatória
-    </span><br />
+    <ion-input formControlName="marca" [disabled]="!edicao"></ion-input>
+    <span
+      *ngIf="formGroup.get('marca')?.touched && formGroup.get('marca')?.errors?.['required']"
+    >
+      Marca é obrigatória </span
+    ><br />
   </ion-item>
   <ion-item>
-    <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
+    <ion-label
+      style="
+        position: relative;
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #333;
+      "
+      position="floating"
+    >
       Ano
     </ion-label>
-    <ion-input formControlName="ano" [value]="carros?.ano" [disabled]="!edicao" (ionChange)="onChange()"></ion-input>
-    <span *ngIf="formGroup.get('ano')?.touched && formGroup.get('ano')?.errors?.['required']">
+    <ion-input formControlName="ano" [disabled]="!edicao"></ion-input>
+    <span
+      *ngIf="formGroup.get('ano')?.touched && formGroup.get('ano')?.errors?.['required']"
+    >
       Ano é obrigatório
     </span>
-    <span *ngIf="formGroup.get('ano')?.touched && formGroup.get('ano')?.errors?.['pattern']">
+    <span
+      *ngIf="formGroup.get('ano')?.touched && formGroup.get('ano')?.errors?.['pattern']"
+    >
       Ano inválido
     </span>
-    <span *ngIf="formGroup.get('ano')?.touched && formGroup.get('ano')?.errors?.['min']">
+    <span
+      *ngIf="formGroup.get('ano')?.touched && formGroup.get('ano')?.errors?.['min']"
+    >
       Ano não pode ser menor que {{ currentYear - 100 }}
     </span>
-    <span *ngIf="formGroup.get('ano')?.touched && formGroup.get('ano')?.errors?.['max']">
-      Ano não pode ser maior que {{ currentYear }}
-    </span><br />
+    <span
+      *ngIf="formGroup.get('ano')?.touched && formGroup.get('ano')?.errors?.['max']"
+    >
+      Ano não pode ser maior que {{ currentYear }} </span
+    ><br />
   </ion-item>
   <ion-item>
-    <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
+    <ion-label
+      style="
+        position: relative;
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #333;
+      "
+      position="floating"
+    >
       Preço
     </ion-label>
-    <ion-input formControlName="price" [value]="carros?.price" [disabled]="!edicao" (ionChange)="onChange()"></ion-input>
-    <span *ngIf="formGroup.get('price')?.touched && formGroup.get('price')?.errors?.['pattern']">
+    <ion-input formControlName="price" [disabled]="!edicao"></ion-input>
+    <span
+      *ngIf="formGroup.get('price')?.touched && formGroup.get('price')?.errors?.['pattern']"
+    >
       Preço inválido
     </span>
-    <span *ngIf="formGroup.get('price')?.touched && formGroup.get('price')?.errors?.['min']">
-      Preço não pode ser negativo
-    </span><br />
+    <span
+      *ngIf="formGroup.get('price')?.touched && formGroup.get('price')?.errors?.['min']"
+    >
+      Preço não pode ser negativo </span
+    ><br />
   </ion-item>
   <ion-item>
-    <ion-label style="position: relative; font-size: 16px; margin-bottom: 8px; color: #333;" position="floating">
+    <ion-label
+      style="
+        position: relative;
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #333;
+      "
+      position="floating"
+    >
       Carroceria
     </ion-label>
-    <ion-select formControlName="carroceria" [value]="carros?.carroceria" [disabled]="!edicao" (ionChange)="onChange()">
+    <ion-select formControlName="carroceria" [disabled]="!edicao">
       <ion-select-option value="Hatch">Hatch</ion-select-option>
       <ion-select-option value="Sedã">Sedã</ion-select-option>
       <ion-select-option value="SUV">SUV</ion-select-option>
       <ion-select-option value="Pick-Up">Pick-Up</ion-select-option>
-      <ion-select-option value="Não Especificado">Não Especificado</ion-select-option>
+      <ion-select-option value="Não Especificado"
+        >Não Especificado</ion-select-option
+      >
     </ion-select>
-    <span *ngIf="formGroup.get('carroceria')?.touched && formGroup.get('carroceria')?.errors?.['required']">
-      Carroceria é obrigatória
-    </span><br />
+    <span
+      *ngIf="formGroup.get('carroceria')?.touched && formGroup.get('carroceria')?.errors?.['required']"
+    >
+      Carroceria é obrigatória </span
+    ><br />
   </ion-item>
-</ion-item-group>
+  <ion-button expand="block" type="submit" class="btn-salvar" [disabled]="!edicao">Salvar</ion-button>
+</form>

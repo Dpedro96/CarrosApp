@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { AlertService } from 'src/app/common/alert.service';
 
 import Carros from 'src/app/model/entities/Carros';
 import { AuthService } from 'src/app/model/services/auth.service';
@@ -25,27 +26,16 @@ export class DetalhesPage implements OnInit {
     private firebase: FirebaseService, 
     private router: Router,
     private auth: AuthService, 
-    private alertController: AlertController
+    private alertController: AlertController,
+    private alert: AlertService
+    
   ) { 
     this.user = this.auth.getUserLogged();
-    this.formCadastrar = this.formBuilder.group({
-      modelo: ['', Validators.required],
-      marca:  ['', Validators.required],
-      ano:  ['', [Validators.required, Validators.pattern(/^(19|20)?\d{2,4}$/), Validators.min(this.currentYear - 100), Validators.max(this.currentYear)]],
-      price: ['', [Validators.pattern(/^(\d{1,3}(.\d{3})*(\.\d{1,2})?|\d+(\.\d{1,2})?)$/), Validators.min(0)]],
-      carroceria:  ['', Validators.required],
-    });
+
   }
 
   ngOnInit() {
     this.carros = history.state.carros;
-    this.formCadastrar.patchValue({
-      modelo: this.carros.modelo,
-      marca: this.carros.marca,
-      ano: this.carros.ano,
-      price: this.carros.price,
-      carroceria: this.carros.carroceria,
-    });
   }
   
   habilitar() {
@@ -57,12 +47,16 @@ export class DetalhesPage implements OnInit {
     }
   }
 
-  salvar() {
-      this.carros.modelo = this.formCadastrar.value.modelo;
-      this.carros.marca = this.formCadastrar.value.marca;
-      this.carros.ano = this.formCadastrar.value.ano;
-      this.carros.price = this.formCadastrar.value.price;
-      this.carros.carroceria = this.formCadastrar.value.carroceria;
+  salvar(formCadastra: FormGroup) {
+    this.alert.simpleLoader();
+    setTimeout(() => {
+      this.alert.dismissLoader();
+    if(formCadastra.valid){
+      this.carros.modelo = formCadastra.value.modelo;
+      this.carros.marca = formCadastra.value.marca;
+      this.carros.ano = formCadastra.value.ano;
+      this.carros.price = formCadastra.value.price;
+      this.carros.carroceria = formCadastra.value.carroceria;
 
       this.firebase.update(this.carros, this.carros.id).then(() => {
         this.presentAlert("Salvo", "Carro Salvo!");
@@ -70,6 +64,11 @@ export class DetalhesPage implements OnInit {
       }).catch(error => {
         this.presentAlert("Erro", error.message);
       });
+    }
+      else{
+        this.alert.presentAlert("Erro", "Campos Obrigatórios");
+      }
+    }, 1000);
   }
 
   excluir() {
