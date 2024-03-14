@@ -18,7 +18,7 @@ export class HomePage {
   query: string = ''; // Adicionado
   @ViewChild('mySearchbar', { static: false }) searchbar: IonSearchbar; 
   public user:any;
-  emptySearchModel: any = {
+  emptySearch: any = {
     icon: 'search-outline',
     title: 'Nenhum carro encontrado.'
   };

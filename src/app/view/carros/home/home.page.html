@@ -18,7 +18,7 @@
        <ion-item-group *ngIf="hasSearched && carros.length > 0">
          <app-cars *ngFor="let carro of carros" [listaCarros]="carro" (click)="detalhar(carro)"></app-cars>
        </ion-item-group>
-       <app-empty-screen *ngIf="hasSearched && carros.length == 0" [model]="emptySearchModel"></app-empty-screen>
+       <app-empty-screen *ngIf="hasSearched && carros.length == 0" [model]="emptySearch"></app-empty-screen>
   </ion-list>
   <ion-fab horizontal="end" vertical="bottom">
        <ion-fab-button class="btn" (click)="irParaCadastrar()">
